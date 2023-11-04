@@ -1,0 +1,53 @@
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+    width:300px;
+}
+
+.title {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.desc {
+    color: #666;
+    font-size: 16px;
+}
+
+.date .desc {
+    font-size: 16px;
+    color: #666;
+}
+
+.time {
+    font-size: 16px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    background: transparent;
+    color: #007bff;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+br {
+    border: 1px solid #000;
+}
