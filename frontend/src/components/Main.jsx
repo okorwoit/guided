@@ -1,22 +1,25 @@
-// import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Dashboard from "../Pages/dashboard.jsx";
-import Opportunities from "../Pages/opportunities.jsx";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from './Dashboard';
+import Opportunities from './Opportunities';
+import LandingPage from '../Pages/LandingPage';
+import Login from '../Pages/Login';
+import Signup from '../Pages/Signup';
+import React from 'react';
+
 
 const Main = () => {
-  // const [searchInput, setSearchInput] = useState('');
-
-  // const handleSearch = (e) => {
-  //     setSearchInput(e.target.value);
-  // }
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/opportunities" element={<Opportunities />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/opportunities" element={<Opportunities />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={< Login />} />
+        <Route path="/signup" element={<Signup />} />
+        
+        
+      </Routes>
+
     </div>
   );
 };

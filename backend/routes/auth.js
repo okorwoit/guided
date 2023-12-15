@@ -17,5 +17,6 @@ router.post('/login', loginUser);
 
 // Route for user profile
 router.get('/profile', getUserProfile);
+router.get("/", (req, res) => res.send("Hello World"))
 
 module.exports = router;

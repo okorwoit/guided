@@ -1,51 +1,52 @@
 .opportunity-form {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    text-align: center;
-    margin: 20px;
-    width: 400px;
-;
-}
-
-.opportunity-form h2 {
-    color: #000;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-form label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-form input, form textarea {
-    padding: 10px 10px 10px 4%;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    width: 80%;
-}
-
-form input[type="number"] {
-    width: 80%;
-}
-
-form button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cancel-button {
+    align-self: flex-end;
+    padding: 5px;
     border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    margin: 20px 0;
+    background-color: transparent;
+    font-size: 20px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-form button:hover {
+  }
+  
+  .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
     background-color: #0056b3;
-}
+  }

@@ -1,0 +1,57 @@
+.opportunities-container {
+    margin-left: 250px; /* Sidebar width */
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button.active {
+    background-color: #0056b3;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust the minmax values to change the card size */
+    grid-gap: 20px;
+  }
+  
+  .add-opp {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .add-opp button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-opp button:hover {
+    background-color: #0056b3;
+  }

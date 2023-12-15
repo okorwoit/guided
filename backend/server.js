@@ -18,8 +18,20 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS
+const allowedOrigins = ["http://localhost:5174", 'https://cron-job.org']
+const corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || origin == undefined) {
+            callback(null, true)
+        } 
+        else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
+app.use(cors(corsOptions));
 
 //Set up middleware to handle different kinds of requests
 app.use(express.json());

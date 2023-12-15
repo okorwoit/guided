@@ -2,28 +2,38 @@
 const User = require('../models/Users'); 
 const MentoringOpportunity = require('../models/MentoringOpportunity'); 
 
+const bcrypt = require('bcrypt');
+
+// Function to hash a password
+const hashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  return hash;
+};
 
 // Function to add a user (admin)
 const createUser = async (req, res) => {
-    const { firstName, lastName, email, password, role } = req.body;
-  
-    try {
-      // Check if user with email already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(400).json({ message: 'User with email already exists' });
-      }
-  
-      // Create new user
-      const user = new User({ firstName, lastName, email, password, role });
-      await user.save();
-  
-      res.status(201).json({ message: 'User created successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server error' });
+  const { firstName, lastName, email, password, role } = req.body;
+
+  try {
+    // Check if user with email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with email already exists' });
     }
-  };
+
+    // Hash password before storing it
+    const hashedPassword = await hashPassword(password);
+
+    // Create new user
+    const user = new User({ firstName, lastName, email, password: hashedPassword, role });
+    await user.save();
+
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Function to view all users (admin)
 const getAllUsers = async (req, res) => {
@@ -38,31 +48,29 @@ const getAllUsers = async (req, res) => {
     }
   };
   
-  // Function to modify a user (admin)
-  const updateUser = async (req, res) => {
-    const userId = req.params.id;
-    const { name, email, password } = req.body;
-  
-    try {
-      // Find user by ID
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Update user fields
-      user.name = name || user.name;
-      user.email = email || user.email;
-      user.password = password || user.password;
-  
-      await user.save();
-  
-      res.status(200).json({ message: 'User updated successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server error' });
+ // Function to modify a user (admin)
+const updateUser = async (req, res) => {
+  const userId = req.params.id;
+  const { name, email } = req.body;
+
+  try {
+    // Find user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
-  };
+
+    // Update user fields
+    user.name = name || user.name;
+    user.email = email || user.email;
+
+    await user.save();
+
+    res.status(200).json({ message: 'User updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
   
   // Function to delete a user (admin)
   const deleteUser = async (req, res) => {
@@ -85,6 +93,8 @@ const getAllUsers = async (req, res) => {
     }
   };
   
+  //  ***************************************************************** //
+
   // Function to view all mentoring opportunities (users)
   const getAllMentoringOpportunities = async (req, res) => {
     try {

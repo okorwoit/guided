@@ -1,0 +1,32 @@
+.mentors-container {
+  margin-left: 250px; /* Sidebar width */
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.add-mentor {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.add-mentor-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-mentor-button:hover {
+  background-color: #0056b3;
+}

@@ -14,70 +14,54 @@ body {
   
   /* Sidebar styles */
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 200px;
     height: 100vh;
-    flex-direction: column;
-    align-items: center; /* Center the content vertically */
-    background-color: #34495e; /* Ustrive-inspired color */
-    color: #ffffff;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    position: fixed;
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 20px;
-    z-index: 1; /* Ensure the sidebar is above the content */
+    z-index: 1;
   }
   
   .sidebar-logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 30px;
   }
   
   .sidebar-category {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 10px 0; /* Add spacing between the categories */
-    flex-grow: 1;
-    margin: 0 10px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    
+  }
+  
+  .sidebar-category a {
+    display: block;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+  }
+  
+  .sidebar-category a.active {
+    color: #3498db;
   }
   
   .divider {
-    width: 80%;
-    margin: 10px auto;
-    border-top: 1px solid #ffffff; /* Style the horizontal line */
+    border: 0;
+    height: 1px;
+    background: #34495e;
+    margin: 20px 0;
+    border-top: 1px solid #ffffff;
   }
-  
-  .sidebar-category button {
-    background-color: transparent;
-    border: none;
-    color: #ffffff;
-    width: 100%;
-    text-decoration: none;
-    margin: 5px;
-    font-size: 18px;
-    flex-grow: 1;
-    cursor: pointer;
-    padding: 10px;
-    transition: background-color 0.3s ease; /* Add a transition effect */
+
+  .sidebar-category a:hover {
+    color: #3498db;
+
   }
-  
-  .sidebar-category button:hover,
-  .sidebar-category button:focus {
-    background-color: #2c3e50; /* Change the background color on hover/focus */
-    border-radius: 5px;
-  }
-  
-  .sidebar-category button.active {
-    font-weight: bold;
-    background-color: #233140; /* Change the background color for the active button */
-    border-radius: 5px;
-    /* Add any other styles for the active button as needed */
-  }
-  
   
   .app{
     display: flex;
@@ -85,7 +69,6 @@ body {
   /* Header styles */
   .content {
     flex: 1;
-    margin-left: 230px; /* Match the width of the sidebar */
   }
   
   .header {
@@ -190,7 +173,7 @@ input, textarea, select {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
+  width: 70%;
 }
 
 .dashboard-card {

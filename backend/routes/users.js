@@ -1,11 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Import the User model
-// const User = require('../models/Users');
-
-// Import the MentoringOpportunity model
-// const MentoringOpportunity = require('../models/MentoringOpportunity');
 
 // Import the admin controller 
 const {
@@ -24,6 +19,9 @@ const {
   deleteMentoringOpportunity,
 } = require('../controllers/mentoringController');
 
+
+// ****************** Admin routes ****************** //
+
 // Add a user
 router.post('/', createUser);
 
@@ -35,6 +33,10 @@ router.patch('/:userId', updateUser);
 
 // Delete a user
 router.delete('/:userId', deleteUser); 
+
+
+// ****************** Mentoring routes ****************** //
+
 
 // View all mentoring opportunities
 router.get('/', getAllMentoringOpportunities); 
