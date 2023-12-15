@@ -8,6 +8,8 @@ const {
   getAllUsers,
   updateUser,
   deleteUser,
+  getMentors,
+  getStudents
 } = require('../controllers/usersController');
 
 // Import the mentoring controller
@@ -29,11 +31,16 @@ router.post('/', createUser);
 router.get('/', getAllUsers); 
 
 // Modify a user
-router.patch('/:userId', updateUser); 
+router.put('/:id', updateUser); 
 
 // Delete a user
-router.delete('/:userId', deleteUser); 
+router.delete('/:id', deleteUser); 
 
+
+
+// View all mentors and students
+router.get('/mentors', getMentors);
+router.get('/students', getStudents);
 
 // ****************** Mentoring routes ****************** //
 

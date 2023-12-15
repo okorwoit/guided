@@ -9,7 +9,6 @@ const dotenv = require("dotenv");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const mentoringRoutes = require("./routes/mentoring");
-const messagesRoutes = require("./routes/messages");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,7 +17,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-const allowedOrigins = ["http://localhost:5174", 'https://cron-job.org']
+const allowedOrigins = ["http://localhost:5173", 'https://cron-job.org']
 const corsOptions = {
     credentials: true,
     origin: function (origin, callback) {
@@ -31,6 +30,12 @@ const corsOptions = {
     }
 }
 
+// // Replace 'http://localhost:3000' with your frontend's origin
+// const corsOptions = {
+//   origin: 'http://localhost:5174',
+//   optionsSuccessStatus: 200,
+// };
+
 app.use(cors(corsOptions));
 
 //Set up middleware to handle different kinds of requests
@@ -42,7 +47,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/mentoring", mentoringRoutes);
-app.use("/messages", messagesRoutes);
 
 
 // Connect to MongoDB

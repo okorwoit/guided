@@ -9,7 +9,6 @@ const mentoringOpportunitySchema = new Schema({
   category: { type: String, required: true },
   date: { type: Date, default: Date.now },
   mentor: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to the User model for the mentor
-  student: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Reference to the User model for the student
   // mentor: { type: String },
   // student: { type: String },
   duration: { type: Number, required: true },

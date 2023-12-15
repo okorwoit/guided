@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
 // **************** Controller function to register a new user **************** //
 
 const signupUser = async (req, res) => {
-  const { email, password, role, firstName } = req.body;
+  const { email, password, role, firstName, bio, expertise } = req.body;
 
   console.log("HELLO SIGNUP")
 
@@ -66,7 +66,7 @@ const signupUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const user = new User({ email, password: hashedPassword, role, firstName });
+    const user = new User({ email, password: hashedPassword, role, firstName, expertise, bio });
 
     // Save the user to the database
     await user.save();

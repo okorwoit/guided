@@ -2,9 +2,6 @@
 const { Router } = require('express');
 const router = Router();
 
-//import User model
-// const User = require('../models/User');
-
 //import user controller
 const { signupUser, loginUser, getUserProfile } = require('../controllers/authController');
 

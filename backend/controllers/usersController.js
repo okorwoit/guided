@@ -13,21 +13,22 @@ const hashPassword = async (password) => {
 
 // Function to add a user (admin)
 const createUser = async (req, res) => {
-  const { firstName, lastName, email, password, role } = req.body;
+  const { firstName, lastName, email, password, role, expertise, bio } = req.body;
 
   try {
+    console.log({firstName, lastName, email, password, role, expertise, bio})
     // Check if user with email already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'User with email already exists' });
-    }
+    // const existingUser = await User.findOne({ email });
+    // if (existingUser) {
+    //   return res.status(400).json({ message: 'User with email already exists' });
+    // }
 
-    // Hash password before storing it
-    const hashedPassword = await hashPassword(password);
+    // // Hash password before storing it
+    // const hashedPassword = await hashPassword(password);
 
-    // Create new user
-    const user = new User({ firstName, lastName, email, password: hashedPassword, role });
-    await user.save();
+    // // Create new user
+    // const user = new User({ firstName, lastName, email, password: hashedPassword, role, expertise, bio });
+    // await user.save();
 
     res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
@@ -47,11 +48,39 @@ const getAllUsers = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   };
+
+const getMentors = async(req,res)=>{
+  try {
+
+    //Fetch users with role Mentor
+    const mentors = await User.find({role:"Mentor"});
+    res.status(200).json({mentors});
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+    
+  }
+}
+
+const getStudents = async(req,res)=>{
+  try {
+
+    //Fetch users with role student
+    const students = await User.find({role:"Student"});
+    res.status(200).json({students});
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+    
+  }
+}
   
  // Function to modify a user (admin)
 const updateUser = async (req, res) => {
   const userId = req.params.id;
-  const { name, email } = req.body;
+  const { email, password, role, firstName, bio, expertise } = req.body;
 
   try {
     // Find user by ID
@@ -61,8 +90,13 @@ const updateUser = async (req, res) => {
     }
 
     // Update user fields
-    user.name = name || user.name;
     user.email = email || user.email;
+    user.password = password || user.password;
+    user.role = role || user.role;
+    user.firstName = firstName || user.firstName;
+    user.bio = bio || user.bio;
+    user.expertise = expertise || user.expertise;
+
 
     await user.save();
 
@@ -74,17 +108,11 @@ const updateUser = async (req, res) => {
   
   // Function to delete a user (admin)
   const deleteUser = async (req, res) => {
-    const userId = req.params.userId;
+    const userId = req.params.id;
   
     try {
       // Find user by ID
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-      }
-  
-      // Delete user
-      await user.remove();
+      const user = await User.findByIdAndDelete(userId);
   
       res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
@@ -200,5 +228,7 @@ const updateUser = async (req, res) => {
     createMentoringOpportunity,
     updateMentoringOpportunity,
     deleteMentoringOpportunity,
+    getMentors,
+    getStudents
   };
   
