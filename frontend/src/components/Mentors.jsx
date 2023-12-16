@@ -5,10 +5,9 @@ import MentorsForm from "./MentorsForm.jsx";
 import { Dialog } from "@mui/material";
 import "./Mentors.css";
 import Sidebar from "./Sidebar.jsx";
+import Header from "./Header.jsx";
 
-const Mentors = (
-  { activeCategory, handleCategoryClick }
-) => {
+const Mentors = () => {
   const [showForm, setShowForm] = useState(false);
   const [mentors, setMentors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,14 +100,14 @@ const Mentors = (
 
   return (
 
-    <>
+    <div className="flex app__container">
 
         <Sidebar
-            activeCategory={activeCategory}
-            onCategoryClick={handleCategoryClick}
+            
           />
     
         <div className="mentors-container">
+        <Header title="Mentors" />
           <div className="cards">
             {loading ? (
               <p>Loading...</p>
@@ -142,7 +141,7 @@ const Mentors = (
           </Dialog>
 
         </div>
-    </>
+    </div>
   );
 };
 

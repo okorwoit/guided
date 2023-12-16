@@ -4,10 +4,9 @@ import StudentsForm from "./StudentsForm.jsx";
 import { Dialog } from "@mui/material";
 import "./Students.css";
 import Sidebar from "./Sidebar.jsx";
+import Header from "./Header.jsx";
 
-const Students = (
-  { activeCategory, handleCategoryClick }
-) => {
+const Students = () => {
   const [showForm, setShowForm] = useState(false);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -99,13 +98,13 @@ const Students = (
   }
 
   return (
-    <>
+    <div className="flex app__container">
       <Sidebar
-            activeCategory={activeCategory}
-            onCategoryClick={handleCategoryClick}
+           
           />
     
         <div className="students-container">
+        <Header title="Students" />
           <div className="cards">
             {loading ? (
               <p>Loading...</p>
@@ -138,7 +137,7 @@ const Students = (
           </Dialog>
 
         </div>
-    </>
+    </div>
   );
 };
 

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import jwt_decode from 'jwt-decode';
-// import Cookies from 'js-cookie';
 import './Login.css';
 import { API_URL } from './Signup';
 
@@ -41,8 +39,6 @@ const Login = () => {
     try {
       // Make a request to the login endpoint
       const response = await axios.post(`http://localhost:3000/auth/login`, { email, password });
-      // Store the JWT in a HttpOnly cookie
-      // Cookies.set('token', response.data.token, { secure: true, httpOnly: true });
       
       // If the login was successful, store the JWT in local storage
       localStorage.setItem('guided__token', response.data.token);
@@ -69,7 +65,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login-left">
-        <img src="/path-to-your-logo.png" alt="Logo" className="login-logo" />
+        <img src="/images/coaching.jpeg" alt="Logo" className="login-logo" />
       </div>
       <div className="login-right">
         <h2>Login</h2>

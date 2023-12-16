@@ -4,11 +4,9 @@ import Card from "./Card.jsx";
 import OpportunityForm from "./OpportunityForm.jsx";
 import Sidebar from "./Sidebar.jsx";
 import { Dialog } from "@mui/material";
+import Header from "./Header.jsx";
 
-const Opportunities = ({
-  activeCategory,
-  handleCategoryClick,
-}) => {
+const Opportunities = ({}) => {
   // State variables
   const [showForm, setShowForm] = useState(false); // Controls the visibility of the form
   const [opportunities, setOpportunities] = useState([]); // Stores the list of opportunities
@@ -134,17 +132,29 @@ const Opportunities = ({
     setOpen((prevOpen) => !prevOpen)
   };
 
+  const [openEdit, setOpenEdit] = useState(false);
+  const handleCancelEdit = () => {
+    setOpenEdit(false);
+  }
+
+  const [currentCardData, setCurrentFormData] = useState(null);
+  const handleOpenEditModal = (data)=>{
+    setOpenEdit(true)
+    setCurrentFormData(data)
+  }
+
+
   // Render the component
   return (
 
-    <>
+    <div className="flex app__container">
 
-        <Sidebar
-            activeCategory={activeCategory}
-            onCategoryClick={handleCategoryClick}
-          />
+      <Sidebar
+          
+        />
     
       <div className="opportunities-container">
+      <Header title="Opportunities" />
         {/* Filter buttons */}
         <div className="button-container">
           <button
@@ -166,8 +176,8 @@ const Opportunities = ({
             Resume Review
           </button>
           <button
-            className={`button ${filter === "Mock Interview" ? "active" : ""}`}
-            onClick={() => filterOpportunities("Mock Interview")}
+            className={`button ${filter === "Mock Interviews" ? "active" : ""}`}
+            onClick={() => filterOpportunities("Mock Interviews")}
           >
             Mock Interview
           </button>
@@ -182,13 +192,8 @@ const Opportunities = ({
             filteredOpportunities.map((opportunity) => (
               <Card
                 key={opportunity._id}
-                title={opportunity.title}
-                desc={opportunity.description}
-                date={opportunity.date}
-                duration={opportunity.duration}
-                onEdit={(updatedData) =>
-                  handleEditOpportunity(opportunity._id, updatedData)
-                }
+                data={opportunity}
+                onEdit={handleOpenEditModal}
                 onDelete={() => handleDeleteOpportunity(opportunity._id)}
               />
             ))
@@ -205,9 +210,19 @@ const Opportunities = ({
         <Dialog open={open} onClose={handleCancel}>
           <OpportunityForm onAddOpportunity={handleAddOpportunity} closeModal={handleCancel}/>
         </Dialog>
+
+        <Dialog open={openEdit} onClose={handleCancelEdit}>
+          <OpportunityForm 
+            onAddOpportunity={handleAddOpportunity} 
+            closeModal={handleCancelEdit}
+            isEdit={true}
+            opportunityData={currentCardData}
+            handleEditOpportunity={handleEditOpportunity}
+          />
+        </Dialog>
       
       </div>
-    </>
+    </div>
   );
 };
 

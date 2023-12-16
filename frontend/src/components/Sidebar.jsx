@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import css from '../styles.css';
 import '../styles.css';
 
 
-function Sidebar({ activeCategory, onCategoryClick }) {
+function Sidebar({ onCategoryClick }) {
     const categories = [
       'Dashboard',
       'Mentors',
@@ -19,27 +19,25 @@ const otherLinks = ['Settings', 'Log Out', 'Profile'];
         <hr className="divider" />
         <div className="sidebar-category">
           {categories.map((category) => (
-            <Link
+            <NavLink
               key={category}
               to={`/${category.toLowerCase()}`}
-              className={activeCategory === category ? 'active' : ''}
               onClick={() => onCategoryClick(category)}
             >
               {category}
-            </Link>
+            </NavLink>
           ))}
         </div>
         <hr className="divider" />
         <div className="sidebar-category">
           {otherLinks.map((category) => (
-            <Link
+            <NavLink
               key={category}
               to={`/${category.toLowerCase()}`}
-              className={activeCategory === category ? 'active' : ''}
               onClick={() => onCategoryClick(category)}
             >
               {category}
-            </Link>
+            </NavLink>
           ))}
         </div>
       </div>

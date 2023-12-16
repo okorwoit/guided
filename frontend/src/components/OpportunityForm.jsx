@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './OpportunityForm.css';
+import { useNavigate } from 'react-router-dom';
 
 // Form input component
 const FormInput = ({ id, name, type, value, onChange, children }) => (
@@ -49,14 +50,27 @@ FormSelect.propTypes = {
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
-const OpportunityForm = ({ onAddOpportunity, closeModal }) => {
+const OpportunityForm = ({ onAddOpportunity, closeModal, isEdit, opportunityData, handleEditOpportunity }) => {
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        category: '',
+        category: 'Career Advice',
         date: '',
         duration: '',
     });
+
+    useEffect(() => {
+        if (isEdit) {
+            console.log(opportunityData);
+            setFormData({
+                title: opportunityData?.title,
+                description: opportunityData?.description,
+                category: opportunityData?.category,
+                date: opportunityData.date ? opportunityData.date.split('T')[0] : '',
+                duration: opportunityData?.duration,
+            });
+        }
+    }, [isEdit]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -66,8 +80,16 @@ const OpportunityForm = ({ onAddOpportunity, closeModal }) => {
         });
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (isEdit) {
+            handleEditOpportunity(opportunityData._id, formData);
+            return;
+        }
+
         onAddOpportunity(formData);
         console.log(formData);
         // Clear the form after submission
@@ -78,21 +100,21 @@ const OpportunityForm = ({ onAddOpportunity, closeModal }) => {
             date: '',
             duration: '',
         });
-        navigate('/opportunities');
+        window.location.reload();
     };
 
     return (
         <div className="opportunity-form">
             <button className="cancel-button" onClick={closeModal}>X</button>
 
-          <h2>Add Opportunity</h2>
+          <h2>{isEdit ? `Edit ${opportunityData?.title}`:"Add Opportunity"} </h2>
           <form onSubmit={handleSubmit}>
             <FormInput id="title" name="title" type="text" value={formData.title} onChange={handleChange}>Title:</FormInput>
             <FormInput id="description" name="description" type="text" value={formData.description} onChange={handleChange}>Description:</FormInput>
             <FormSelect id="category" name="category" value={formData.category} onChange={handleChange} options={['Career Advice', 'Resume Review', 'Mock Interviews']}>Category:</FormSelect>
             <FormInput id="date" name="date" type="date" value={formData.date} onChange={handleChange}>Date:</FormInput>
             <FormInput id="duration" name="duration" type="number" value={formData.duration} onChange={handleChange}>Duration (in hours):</FormInput>
-            <button type="submit">Add</button>
+            <button type="submit">{isEdit ? "Edit":"Add"}</button>
           </form>
         </div>
       );

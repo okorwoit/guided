@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import OpportunityForm from './OpportunityForm.jsx';
 import MentorsForm from './MentorsForm.jsx';
 import Sidebar from './Sidebar.jsx';
+import Header from './Header.jsx';
 
 // Card component for better readability and maintainability
 const CardComponent = ({ title, path, handleButtonClick }) => (
@@ -89,12 +90,12 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
 
   return (
 
-    <>
+    <div className="flex app__container">
       <Sidebar
-            activeCategory={activeCategory}
             onCategoryClick={handleCategoryClick}
           />
       <div className="dashboard-container">
+        <Header />
         <div className="welcome">
           <span>Welcome, {current__user.email}!</span>
           <p>What would you love to do?</p>
@@ -114,7 +115,7 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
       </div>
       
     
-    </>
+    </div>
   );
 };
 

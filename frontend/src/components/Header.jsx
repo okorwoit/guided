@@ -1,12 +1,12 @@
 // Header.jsx
 
-function Header({ activeCategory }) {
+function Header({ activeCategory, title }) {
     
 
   return (
     <div className="header">
       <div className="header-left">
-        <div className="active-category">{activeCategory}</div>
+        <div className="active-category">{title || "Dashboard"}</div>
       </div>
       {/* <div className="header-center">
         <input type="text" placeholder="Search" />

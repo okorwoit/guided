@@ -1,7 +1,8 @@
-.students-container {
-    margin-left: 250px; /* Sidebar width */
-    padding: 20px;
+
+  .students-container {
+    width: 85%;/* Sidebar width */
     background-color: #f5f5f5;
+    overflow-y: auto;
   }
   
   .cards {

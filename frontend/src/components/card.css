@@ -5,7 +5,8 @@
     /* padding: 20px; */
     text-align: center;
     margin: 20px;
-    width:300px;
+    width: 300px;
+    padding: 2rem 1rem;
 }
 
 .title {
