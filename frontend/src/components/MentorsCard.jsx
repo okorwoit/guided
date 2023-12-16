@@ -4,6 +4,7 @@ import './MentorsCard.css';
 import axios from 'axios';
 
 const MentorsCard = ({ mentor, onDelete, handleOpenEditModal }) => {
+    const current__user = JSON.parse(localStorage.getItem('guided__user'));
 
     const [deleting, setDeleting] = useState(false);
     const handleDeleteUser = async()=>{
@@ -31,8 +32,12 @@ const MentorsCard = ({ mentor, onDelete, handleOpenEditModal }) => {
             <p className="mentor-email">Email: {mentor.email}</p>
             <p className="mentor-expertise">Expertise: {mentor.expertise}</p>
             <p className="mentor-bio">Bio: {mentor.bio}</p>
-            <button className="edit-button" onClick={()=>handleOpenEditModal(mentor)}>Edit</button>
-            <button className="delete-button" onClick={handleDeleteUser}>{deleting ? "Progress...":"Delete"}</button>
+            {current__user.role === "Admin" &&
+            <>
+                <button className="edit-button" onClick={()=>handleOpenEditModal(mentor)}>Edit</button>
+                <button className="delete-button" onClick={handleDeleteUser}>{deleting ? "Progress...":"Delete"}</button>
+            </>            
+            }
         </div>
     );
 };

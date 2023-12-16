@@ -21,7 +21,7 @@ const CardComponent = ({ title, path, handleButtonClick }) => (
   </Card>
 );
 
-const Dashboard = ({activeCategory, handleCategoryClick }) => {
+const Dashboard = ({ }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -34,14 +34,6 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
     navigate('/opportunities');
   }
 
-  // Handles form submission, closes dialog and navigates to '/opportunities' path
-  const handleFormSubmit = (opportunityData) => {
-    // Add opportunityData to your database here
-    setOpen(false);
-    navigate('/opportunities');
-  };
-
-
   // Information for each card
   const cardInfo = [
     { id: 2, title: 'Opportunities', path: '/opportunities' },
@@ -52,12 +44,6 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
     { id: 2, title: 'Opportunities', path: '/opportunities' },
     { id: 3, title: 'Add Student', path: '/students' },
   ]
-
-  // Handles form cancellation, closes dialog
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
   
   const [info, setInfo] = useState(cardInfo);
   const current__user = JSON.parse(localStorage.getItem('guided__user'));
@@ -69,30 +55,13 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
   }, [])
 
   
-  const [openAddMentor, setOpenAddMentor] = useState(false);
-  const handleOpenAddMentor = () => {
-    setOpenAddMentor(true);
-  }
-  
-  const cancelAddMentor = () => {
-    setOpenAddMentor(false);
-  }
-
-  const [openAddStudent, setOpenAddStudent] = useState(false);
-  const handleOpenAddStudent = () => {
-    setOpenAddStudent(true);
-  }
-  
-  const cancelAddStudent = () => {
-    setOpenAddStudent(false);
-  }
+ 
 
 
   return (
 
     <div className="flex app__container">
       <Sidebar
-            onCategoryClick={handleCategoryClick}
           />
       <div className="dashboard-container">
         <Header />
@@ -102,16 +71,10 @@ const Dashboard = ({activeCategory, handleCategoryClick }) => {
         </div>
         <div className="card-container">
           {info.map((card, i) => (
-            <CardComponent key={card.id} title={card.title} handleButtonClick={i===0 ? handleOpenAddMentor : navigateToOpporunities} />
+            <CardComponent key={card.id} title={card.title} handleButtonClick={card.id===1 ? ()=>{navigate("/mentors")} : (card.id === 2 ? navigateToOpporunities:()=>navigate("/students"))} />
           ))}
         </div>
-        <Dialog open={open} onClose={handleCancel}>
-          <OpportunityForm onFormSubmit={handleFormSubmit} onCancel={handleCancel} />
-        </Dialog>
-
-        <Dialog open={openAddMentor} onClose={cancelAddMentor}>
-          <MentorsForm onCancel={cancelAddMentor}/>
-        </Dialog>
+        
       </div>
       
     

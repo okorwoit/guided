@@ -8,6 +8,10 @@ import Sidebar from "./Sidebar.jsx";
 import Header from "./Header.jsx";
 
 const Mentors = () => {
+
+  const current__user = JSON.parse(localStorage.getItem('guided__user'));
+
+
   const [showForm, setShowForm] = useState(false);
   const [mentors, setMentors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -128,9 +132,10 @@ const Mentors = () => {
               <p>No mentors available.</p>
             )}
           </div>
+          {current__user.role === "Admin" &&
           <div className="add-mentor">
             <button onClick={handleOpenAddModal}>Add Mentor</button>
-          </div>
+          </div>}
 
           <Dialog open={openEditModal} onClose={closeEditModal}>
               <MentorsForm onCancel={closeEditModal} isEdit={true} mentorData={editData}/>

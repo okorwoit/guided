@@ -1,118 +1,56 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 // import css from '../styles.css';
 import '../styles.css';
 
 
 function Sidebar({ onCategoryClick }) {
+
+  const current__user = JSON.parse(localStorage.getItem('guided__user'));
+
     const categories = [
       'Dashboard',
       'Mentors',
-      'Opportunities',
-      'Students',
+      'Opportunities'
     ];
-const otherLinks = ['Settings', 'Log Out', 'Profile'];
+
+    const [menuItems, setMenuItems] = useState(categories);
+
+    useEffect(()=>{
+      if(current__user.role === 'Admin'){
+        setMenuItems([
+          ...categories,
+          'Students'
+        ]);
+      }
+    }, [])
+
+    const navigate = useNavigate();
 
     return (
       <div className="sidebar">
         <div className="sidebar-logo">GUIDED</div>
         <hr className="divider" />
         <div className="sidebar-category">
-          {categories.map((category) => (
+          {menuItems.map((item) => (
             <NavLink
-              key={category}
-              to={`/${category.toLowerCase()}`}
-              onClick={() => onCategoryClick(category)}
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              onClick={() => onCategoryClick(item)}
             >
-              {category}
+              {item}
             </NavLink>
           ))}
         </div>
         <hr className="divider" />
         <div className="sidebar-category">
-          {otherLinks.map((category) => (
-            <NavLink
-              key={category}
-              to={`/${category.toLowerCase()}`}
-              onClick={() => onCategoryClick(category)}
-            >
-              {category}
-            </NavLink>
-          ))}
+          <button onClick={()=>{localStorage.removeItem("guided__user"); navigate("/login")  }}>
+            Logout
+          </button>          
         </div>
       </div>
     );
 }
 
 export default Sidebar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-
-// // Start of Sidebar component
-// function Sidebar({ activeCategory, onCategoryClick }) {
-//   // Array of categories and other links
-//     const categories = [
-//       'Dashboard',
-//       'Mentors',
-//       'Opportunities',
-//       'Messages',
-//       'Documents',
-//       'Community',
-//     ];
-//     const otherLinks = ['Settings', 'Log Out', 'Profile'];
-  
-//     // Return the JSX for the sidebar component
-//     return (
-//       <div className="sidebar">
-//         <div className="sidebar-logo">Your Logo</div>
-//         <hr className="divider" />
-//         <div className="sidebar-category">
-//           {/* Map the categories array and create a button for each category */}
-//           {categories.map((category) => (
-//             <button
-//               key={category} // Unique key for each category
-//               className={activeCategory === category ? 'active' : ''}
-//               onClick={() => onCategoryClick(category)}
-//             >
-//               {category}
-//             </button>
-//           ))}
-//         </div>
-//         <hr className="divider" />
-//         <div className="sidebar-category">
-//           {otherLinks.map((category) => (
-//             <button
-//               key={category}
-//               className={activeCategory === category ? 'active' : ''}
-//               onClick={() => onCategoryClick(category)}
-//             >
-//               {category}
-//             </button>
-//           ))}
-//         </div>
-
-//       </div>
-//     );
-//   }
-  
-//   export default Sidebar;
 

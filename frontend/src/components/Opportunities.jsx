@@ -7,6 +7,9 @@ import { Dialog } from "@mui/material";
 import Header from "./Header.jsx";
 
 const Opportunities = ({}) => {
+
+  const current__user = JSON.parse(localStorage.getItem('guided__user'));
+
   // State variables
   const [showForm, setShowForm] = useState(false); // Controls the visibility of the form
   const [opportunities, setOpportunities] = useState([]); // Stores the list of opportunities
