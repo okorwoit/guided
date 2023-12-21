@@ -41,7 +41,7 @@ const updateMentoringOpportunity = async (req, res, next) => {
   }
 };
 
-const deleteMentoringOpportunity = async (req, res, next) => {
+const deleteMentoringOpportunity = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -51,13 +51,9 @@ const deleteMentoringOpportunity = async (req, res, next) => {
     }
 
     const result = await mentoringOpportunity.deleteOne();
-    if (result.ok === 1) {
-      res.status(200).json({ message: 'Mentoring opportunity deleted successfully' });
-    } else {
-      throw new Error('Failed to delete mentoring opportunity');
-    }
+    res.status(200).json({ message: 'Mentoring opportunity deleted successfully' });
   } catch (error) {
-    next(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 

@@ -30,11 +30,6 @@ const corsOptions = {
     }
 }
 
-// // Replace 'http://localhost:3000' with your frontend's origin
-// const corsOptions = {
-//   origin: 'http://localhost:5174',
-//   optionsSuccessStatus: 200,
-// };
 
 app.use(cors(corsOptions));
 

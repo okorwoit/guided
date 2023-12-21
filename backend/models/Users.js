@@ -10,7 +10,7 @@ const userSchema = new Schema({
     unique: true, 
     match: /.+\@.+\..+/ // Simple regex to validate email format
   },
-  password: { type: String, required: true }, // Remember to hash passwords before storing them
+  password: { type: String, required: true }, // Hash passwords before storing them
   role: { 
     type: String, 
     required: true, 
